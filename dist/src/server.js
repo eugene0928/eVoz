@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const data_source_js_1 = require("./utils/data-source.js");
-const index_js_1 = __importDefault(require("./modules/index.js"));
+const podcast_js_1 = __importDefault(require("./data/podcast.js"));
 const app = (0, express_1.default)();
 const PORT = 4000;
 (function () {
@@ -22,10 +22,10 @@ const PORT = 4000;
         try {
             const db = yield data_source_js_1.AppDataSource.initialize();
             console.log("Db is initialized!");
+            yield (0, podcast_js_1.default)(data_source_js_1.AppDataSource);
             // middlewares
             app.use(express_1.default.json());
             // routes
-            app.use(index_js_1.default.Reg_Router);
         }
         catch (error) {
             console.log(error.message);

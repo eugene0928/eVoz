@@ -9,44 +9,52 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Admins = void 0;
+exports.Podcast = void 0;
 const typeorm_1 = require("typeorm");
 const class_validator_1 = require("class-validator");
-let Admins = class Admins extends typeorm_1.BaseEntity {
+const admin_js_1 = require("./admin.js");
+const category_js_1 = require("./category.js");
+let Podcast = class Podcast extends typeorm_1.BaseEntity {
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)("uuid"),
     __metadata("design:type", String)
-], Admins.prototype, "id", void 0);
+], Podcast.prototype, "id", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => admin_js_1.Admins, (admin) => admin.id, { nullable: false }),
+    __metadata("design:type", Object)
+], Podcast.prototype, "admin", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => category_js_1.Category, (category) => category.id, { nullable: false }),
+    __metadata("design:type", category_js_1.Category)
+], Podcast.prototype, "category", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
-    (0, class_validator_1.Length)(2, 32),
+    (0, class_validator_1.Length)(2, 256),
     __metadata("design:type", String)
-], Admins.prototype, "name", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ name: "email" }),
-    (0, class_validator_1.IsEmail)(),
-    __metadata("design:type", String)
-], Admins.prototype, "email", void 0);
+], Podcast.prototype, "name", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
-    (0, class_validator_1.Length)(8, 16),
+    (0, class_validator_1.Length)(2, 128),
     __metadata("design:type", String)
-], Admins.prototype, "password", void 0);
+], Podcast.prototype, "speaker", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], Podcast.prototype, "picture", void 0);
 __decorate([
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)
-], Admins.prototype, "created_at", void 0);
+], Podcast.prototype, "created_at", void 0);
 __decorate([
     (0, typeorm_1.UpdateDateColumn)(),
     __metadata("design:type", Date)
-], Admins.prototype, "updated_at", void 0);
+], Podcast.prototype, "updated_at", void 0);
 __decorate([
     (0, typeorm_1.DeleteDateColumn)(),
     __metadata("design:type", Date)
-], Admins.prototype, "deleted_at", void 0);
-Admins = __decorate([
-    (0, typeorm_1.Entity)(),
-    (0, typeorm_1.Unique)(["email"])
-], Admins);
-exports.Admins = Admins;
+], Podcast.prototype, "deleted_at", void 0);
+Podcast = __decorate([
+    (0, typeorm_1.Entity)({ name: "podcast" })
+], Podcast);
+exports.Podcast = Podcast;

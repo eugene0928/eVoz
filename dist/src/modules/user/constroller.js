@@ -12,21 +12,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.POST_REG = void 0;
 const class_validator_1 = require("class-validator");
 const data_source_js_1 = require("../../utils/data-source.js");
-const user_js_1 = require("../../entity/user.js");
+const admin_js_1 = require("../../entity/admin.js");
 const POST_REG = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const user = new user_js_1.Users();
-        user.name = req.body.name;
-        user.email = req.body.email;
-        user.password = req.body.password;
-        const errors = yield (0, class_validator_1.validate)(user);
+        const admin = new admin_js_1.Admins();
+        admin.name = req.body.name;
+        admin.email = req.body.email;
+        admin.password = req.body.password;
+        const errors = yield (0, class_validator_1.validate)(admin);
         if (errors.length) {
             next("Validation error");
             return;
         }
-        console.log(user);
-        yield data_source_js_1.AppDataSource.manager.save(user);
-        res.status(200).json({ status: 200, message: "registered successfully", data: user });
+        console.log(admin);
+        yield data_source_js_1.AppDataSource.manager.save(admin);
+        res.status(200).json({ status: 200, message: "registered successfully", data: admin });
     }
     catch (error) {
         next(error.message);
