@@ -3,7 +3,7 @@ import { IsEmail, Length } from 'class-validator'
 
 @Entity()
 @Unique(["email"])
-export class Users extends BaseEntity{
+export class Admins extends BaseEntity{
     @PrimaryGeneratedColumn("uuid")
     id!: string
 
