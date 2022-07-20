@@ -1,6 +1,6 @@
 import { BaseEntity, Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, DeleteDateColumn, UpdateDateColumn, ManyToOne, Admin  } from 'typeorm';
 import { Length } from 'class-validator';
-import { Admins } from './admin.js'
+import { Users } from './user.js'
 import { Category } from './category.js'
 
 @Entity({ name: "podcast" })
@@ -8,8 +8,8 @@ export class Podcast extends BaseEntity{
     @PrimaryGeneratedColumn("uuid")
     id!: string
 
-    @ManyToOne(() => Admins, (admin) => admin.id, { nullable: false })
-    admin!: Admin
+    @ManyToOne(() => Users, (user) => user.id, { nullable: false })
+    admin!: Users
 
     @ManyToOne(() => Category, (category) => category.id, { nullable: false })
     category!: Category
