@@ -1,4 +1,4 @@
-import express, { Express, Router } from "express";
+import express, { Express } from "express";
 import { AppDataSource } from './utils/data-source.js';
 import loadData from "./data/podcast.js";
 
