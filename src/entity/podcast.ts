@@ -1,4 +1,4 @@
-import { BaseEntity, Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, DeleteDateColumn, UpdateDateColumn, ManyToOne, Admin  } from 'typeorm';
+import { BaseEntity, Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, DeleteDateColumn, UpdateDateColumn, ManyToOne  } from 'typeorm';
 import { Length } from 'class-validator';
 import { Users } from './user.js'
 import { Category } from './category.js'
