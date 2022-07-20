@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Podcast = void 0;
 const typeorm_1 = require("typeorm");
 const class_validator_1 = require("class-validator");
-const admin_js_1 = require("./admin.js");
+const user_js_1 = require("./user.js");
 const category_js_1 = require("./category.js");
 let Podcast = class Podcast extends typeorm_1.BaseEntity {
 };
@@ -21,8 +21,8 @@ __decorate([
     __metadata("design:type", String)
 ], Podcast.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => admin_js_1.Admins, (admin) => admin.id, { nullable: false }),
-    __metadata("design:type", Object)
+    (0, typeorm_1.ManyToOne)(() => user_js_1.Users, (user) => user.id, { nullable: false }),
+    __metadata("design:type", user_js_1.Users)
 ], Podcast.prototype, "admin", void 0);
 __decorate([
     (0, typeorm_1.ManyToOne)(() => category_js_1.Category, (category) => category.id, { nullable: false }),
