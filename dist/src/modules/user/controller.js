@@ -16,8 +16,40 @@ exports.Login = exports.Register = void 0;
 const user_js_1 = require("../../entity/user.js");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const custom_errors_js_1 = require("../../utils/custom.errors.js");
-const Register = (req, res, next) => {
-};
+const joi_js_1 = require("../../utils/joi.js");
+const data_source_js_1 = require("../../utils/data-source.js");
+const Register = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { error, value } = joi_js_1.reg_schema.validate(req.body);
+        if (error) {
+            next(new custom_errors_js_1.ValidationError(422, error.message));
+            return;
+        }
+        value.password = yield bcrypt_1.default.hash(value.password, 5);
+        // insert data db
+        let data = undefined;
+        try {
+            data = yield data_source_js_1.AppDataSource.createQueryBuilder()
+                .insert()
+                .into(user_js_1.Users)
+                .values([{
+                    name: value.name,
+                    email: value.email,
+                    password: value.password
+                }])
+                .execute();
+        }
+        catch (error) {
+            next(new custom_errors_js_1.ValidationError(422, error.message));
+            return;
+        }
+        console.log(data.identifiers[0].id);
+        res.status(200).json({ status: 200, message: "Successfully registered", data: data.identifiers[0].id });
+    }
+    catch (error) {
+        next(new custom_errors_js_1.InternalServerError(500, error.message));
+    }
+});
 exports.Register = Register;
 const Login = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {

@@ -8,22 +8,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Users = void 0;
 const typeorm_1 = require("typeorm");
 const class_validator_1 = require("class-validator");
-const bcrypt_1 = __importDefault(require("bcrypt"));
 let Users = class Users extends typeorm_1.BaseEntity {
-    hashPassw() {
-        bcrypt_1.default.hash(this.password, 5, (err, hash) => {
-            if (err)
-                throw new Error(err.message);
-            this.password = hash;
-        });
-    }
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)("uuid"),
@@ -43,16 +32,6 @@ __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Users.prototype, "password", void 0);
-__decorate([
-    (0, typeorm_1.BeforeInsert)(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], Users.prototype, "hashPassw", null);
-__decorate([
-    (0, typeorm_1.Column)("boolean", { default: false }),
-    __metadata("design:type", Boolean)
-], Users.prototype, "is_admin", void 0);
 __decorate([
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)
