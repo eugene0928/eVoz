@@ -1,0 +1,36 @@
+!NOTE: 
+    There will be single admin and all others will be just users.
+
+
+ROUTES:
+GET:
+    /categories:
+        output:
+            all available categories
+
+    /podcast/:category_id:
+        output:
+            all avaliable podcasts related to category
+
+POST:
+    /register:
+        input: 
+            1. name
+            2. email
+            3. password
+        output:
+            1. user_id
+    
+    /login:
+        input: 
+            1. email
+            2. password
+        output: 
+            1. user_id
+    
+    /addpodcast/:admin_id:
+        input:
+            1. category_id
+            2. name (podcast)
+            3. speaker (of podcast)
+            4. picture (there will be default picture if admin will not choose a picture)
