@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, Unique, CreateDateColumn, DeleteDateColumn, UpdateDateColumn,
 BeforeInsert } from 'typeorm'
 import { IsEmail, Length } from 'class-validator'
-import bcrypt from "bcrypt"
+
 
 @Entity()
 @Unique(["email"])
@@ -19,16 +19,6 @@ export class Users extends BaseEntity{
 
     @Column()
     password!: string 
-    @BeforeInsert()
-     hashPassw() {
-        bcrypt.hash(this.password, 5,  (err, hash) => {
-            if(err) throw new Error(err.message)
-            this.password = hash
-          });
-    }
-
-    @Column("boolean", { default: false })
-    is_admin!: boolean
  
     @CreateDateColumn()
     created_at!: Date
