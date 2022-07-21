@@ -15,6 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const data_source_js_1 = require("./utils/data-source.js");
 const podcast_js_1 = __importDefault(require("./data/podcast.js"));
+const index_js_1 = __importDefault(require("./modules/index.js"));
+const errorHandling_js_1 = require("./utils/errorHandling.js");
 const app = (0, express_1.default)();
 const PORT = 4000;
 (function () {
@@ -26,6 +28,9 @@ const PORT = 4000;
             // middlewares
             app.use(express_1.default.json());
             // routes
+            app.use(index_js_1.default.UserRouter);
+            //error handler
+            app.use(errorHandling_js_1.handler);
         }
         catch (error) {
             console.log(error.message);
