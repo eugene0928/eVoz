@@ -18,6 +18,7 @@ const PORT:number = 4000;
       
       // routes
       app.use(Routers.UserRouter)
+      app.use(Routers.CategoryRouter)
 
       //error handler
       app.use(handler)
