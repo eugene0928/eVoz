@@ -15,7 +15,7 @@ export class Podcast extends BaseEntity{
     category!: Category
 
     @Column()
-    @Length(2, 256)
+    @Length(2, 256) 
     name!: string
     
     @Column()
@@ -24,6 +24,9 @@ export class Podcast extends BaseEntity{
 
     @Column()
     picture!: string
+
+    @Column()
+    file!: string
     
     @CreateDateColumn()
     created_at!: Date
