@@ -12,3 +12,22 @@ export const reg_schema = Joi.object({
                 .pattern(new RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/))
                 .required()
 })
+
+export const add_podcast_schema = Joi.object({
+        category_id: Joi.string().guid({
+                version: [
+                    'uuidv4',
+                    'uuidv5'
+                ]
+                })
+                .required(),
+        name: Joi.string()
+                .min(2)
+                .max(256)
+                .required(),
+        speaker: Joi.string()
+                        .min(2)
+                        .max(128)
+                        .pattern(new RegExp(/^[a-zA-Z\s]*$/))
+                        .required()
+})
