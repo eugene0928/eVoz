@@ -24,7 +24,8 @@ export const Register = async (req: Request, res: Response, next: NextFunction) 
                             .values([{ 
                                 name: value.name,
                                 email: value.email,
-                                password: value.password
+                                password: value.password,
+                                is_admin: false
                              }])
                             .execute();
         } catch (error: any) {
@@ -32,8 +33,6 @@ export const Register = async (req: Request, res: Response, next: NextFunction) 
             return
         }
         
-        console.log(data.identifiers[0].id)
-
         res.status(200).json({ status: 200, message: "Successfully registered", data: data.identifiers[0].id })
     } catch (error: any) {
         next(new InternalServerError(500, error.message))
@@ -57,4 +56,8 @@ export const Login = async (req: Request, res: Response, next: NextFunction) => 
         next(new InternalServerError(500, error.message))
     }
     
+}
+
+export const Register_Admin = () => {
+    // this route will be to add new admin
 }
