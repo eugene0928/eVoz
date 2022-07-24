@@ -6,11 +6,11 @@ import { Podcast } from "../entity/podcast.js"
 
 export const AppDataSource = new DataSource({
     type: "postgres",
-    host: "localhost",
+    host: process.env.HOST,
     port: 5432,
     username: "postgres",
-    password: "",
-    database: "postgres",
+    password: process.env.PASSWORD,
+    database: process.env.DB,
     synchronize: true,
     logging: false,
     entities: [ Users,Category, Podcast ],
