@@ -4,7 +4,8 @@ import loadData from "./data/podcast.js";
 import Routers from "./modules/index.js";
 import { handler } from "./utils/errorHandling.js";
 import fileUpload from "express-fileupload";
-
+import "./conf.js";
+ 
 const app: Express = express();
 const PORT:number = 4000;
 
