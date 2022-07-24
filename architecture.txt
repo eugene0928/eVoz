@@ -34,3 +34,15 @@ POST:
             2. name (podcast)
             3. speaker (of podcast)
             4. picture (there will be default picture if admin will not choose a picture)
+        output:
+            1. podcast_id
+
+!NEXT REALEASE!
+    /register/:admin_id:
+        input:
+            1. name
+            2. email
+            3. password
+            4. is_admin (true)
+        output:
+            1. admin_id
