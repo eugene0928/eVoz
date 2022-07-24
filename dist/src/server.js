@@ -18,6 +18,7 @@ const podcast_js_1 = __importDefault(require("./data/podcast.js"));
 const index_js_1 = __importDefault(require("./modules/index.js"));
 const errorHandling_js_1 = require("./utils/errorHandling.js");
 const express_fileupload_1 = __importDefault(require("express-fileupload"));
+require("./conf.js");
 const app = (0, express_1.default)();
 const PORT = 4000;
 (function () {
