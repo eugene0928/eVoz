@@ -34,6 +34,7 @@ const PORT = 4000;
             app.use(index_js_1.default.UserRouter);
             app.use(index_js_1.default.CategoryRouter);
             app.use(index_js_1.default.PodcastRouter);
+            app.use(index_js_1.default.AdminRouter);
             //error handler
             app.use(errorHandling_js_1.handler);
         }
