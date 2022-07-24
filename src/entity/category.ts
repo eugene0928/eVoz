@@ -1,7 +1,8 @@
-import { BaseEntity, Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, DeleteDateColumn, UpdateDateColumn  } from 'typeorm';
+import { BaseEntity, Entity, Column, PrimaryGeneratedColumn, OneToMany, CreateDateColumn, DeleteDateColumn, UpdateDateColumn  } from 'typeorm';
 import { Length } from 'class-validator';
+import { Podcast } from "./podcast.js"
 
-@Entity()
+@Entity({ name: "category" })
 export class Category extends BaseEntity{
     @PrimaryGeneratedColumn("uuid")
     id!: string
@@ -9,6 +10,9 @@ export class Category extends BaseEntity{
     @Column()
     @Length(2, 256)
     name!: string
+
+    @OneToMany(() => Podcast, (podcast) => podcast.category)
+    podcast!: Podcast
 
     @CreateDateColumn()
     created_at!: Date

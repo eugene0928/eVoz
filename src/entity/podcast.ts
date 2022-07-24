@@ -11,7 +11,7 @@ export class Podcast extends BaseEntity{
     @ManyToOne(() => Users, (user) => user.id, { nullable: false })
     admin!: Users
 
-    @ManyToOne(() => Category, (category) => category.id, { nullable: false })
+    @ManyToOne(() => Category, (category) => category.podcast, { nullable: false })
     category!: Category
 
     @Column()
