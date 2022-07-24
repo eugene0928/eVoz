@@ -86,3 +86,20 @@ export const Add_Podcast = async (req: Request, res: Response, next: NextFunctio
         next(new InternalServerError(500, error.message))
     }
 }
+
+export const Get_Podcast_By_Category = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        // get data from db
+        const [ podcasts ] = await AppDataSource.getRepository(Podcast)
+                                            .createQueryBuilder("podcast")
+                                            .where("podcast.categoryId = :id", { id: req.params.category_id })
+                                            .getMany()
+
+        if(podcasts)
+            res.status(200).json({ status: 200, message: "Available podcasts", data: podcasts })
+        else 
+            res.status(404).json({ status: 404, message: "Not available podcasts to this category", data: null })
+    } catch (error: any) {
+        next(new InternalServerError(500, error.message))
+    } 
+}
