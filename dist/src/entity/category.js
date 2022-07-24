@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Category = void 0;
 const typeorm_1 = require("typeorm");
 const class_validator_1 = require("class-validator");
+const podcast_js_1 = require("./podcast.js");
 let Category = class Category extends typeorm_1.BaseEntity {
 };
 __decorate([
@@ -23,6 +24,10 @@ __decorate([
     (0, class_validator_1.Length)(2, 256),
     __metadata("design:type", String)
 ], Category.prototype, "name", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => podcast_js_1.Podcast, (podcast) => podcast.category),
+    __metadata("design:type", podcast_js_1.Podcast)
+], Category.prototype, "podcast", void 0);
 __decorate([
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)
@@ -36,6 +41,6 @@ __decorate([
     __metadata("design:type", Date)
 ], Category.prototype, "deleted_at", void 0);
 Category = __decorate([
-    (0, typeorm_1.Entity)()
+    (0, typeorm_1.Entity)({ name: "category" })
 ], Category);
 exports.Category = Category;

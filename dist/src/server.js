@@ -17,6 +17,7 @@ const data_source_js_1 = require("./utils/data-source.js");
 const podcast_js_1 = __importDefault(require("./data/podcast.js"));
 const index_js_1 = __importDefault(require("./modules/index.js"));
 const errorHandling_js_1 = require("./utils/errorHandling.js");
+const express_fileupload_1 = __importDefault(require("express-fileupload"));
 const app = (0, express_1.default)();
 const PORT = 4000;
 (function () {
@@ -27,8 +28,11 @@ const PORT = 4000;
             yield (0, podcast_js_1.default)(data_source_js_1.AppDataSource);
             // middlewares
             app.use(express_1.default.json());
+            app.use((0, express_fileupload_1.default)());
             // routes
             app.use(index_js_1.default.UserRouter);
+            app.use(index_js_1.default.CategoryRouter);
+            app.use(index_js_1.default.PodcastRouter);
             //error handler
             app.use(errorHandling_js_1.handler);
         }

@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Login = exports.Register = void 0;
+exports.Register_Admin = exports.Login = exports.Register = void 0;
 const user_js_1 = require("../../entity/user.js");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const custom_errors_js_1 = require("../../utils/custom.errors.js");
@@ -35,7 +35,8 @@ const Register = (req, res, next) => __awaiter(void 0, void 0, void 0, function*
                 .values([{
                     name: value.name,
                     email: value.email,
-                    password: value.password
+                    password: value.password,
+                    is_admin: false
                 }])
                 .execute();
         }
@@ -43,7 +44,6 @@ const Register = (req, res, next) => __awaiter(void 0, void 0, void 0, function*
             next(new custom_errors_js_1.ValidationError(422, error.message));
             return;
         }
-        console.log(data.identifiers[0].id);
         res.status(200).json({ status: 200, message: "Successfully registered", data: data.identifiers[0].id });
     }
     catch (error) {
@@ -68,3 +68,7 @@ const Login = (req, res, next) => __awaiter(void 0, void 0, void 0, function* ()
     }
 });
 exports.Login = Login;
+const Register_Admin = () => {
+    // this route will be to add new admin
+};
+exports.Register_Admin = Register_Admin;

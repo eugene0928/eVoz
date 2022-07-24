@@ -25,7 +25,7 @@ __decorate([
     __metadata("design:type", user_js_1.Users)
 ], Podcast.prototype, "admin", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => category_js_1.Category, (category) => category.id, { nullable: false }),
+    (0, typeorm_1.ManyToOne)(() => category_js_1.Category, (category) => category.podcast, { nullable: false }),
     __metadata("design:type", category_js_1.Category)
 ], Podcast.prototype, "category", void 0);
 __decorate([
@@ -42,6 +42,10 @@ __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Podcast.prototype, "picture", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], Podcast.prototype, "file", void 0);
 __decorate([
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)

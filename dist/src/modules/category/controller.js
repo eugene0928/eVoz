@@ -9,16 +9,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.handler = void 0;
-const promises_1 = require("fs/promises");
-const path_1 = require("path");
-const handler = (error, req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    if (error.status == 500) {
-        const data = `${new Date().toISOString()}___${req.url}___${req.method}___${error.message}\n`;
-        (0, promises_1.appendFile)((0, path_1.join)(process.cwd(), "logger.txt"), data);
-        res.status(500).json({ status: 500, name: "InternalServerError", message: "Internal Server Error" });
-        return;
+exports.Get_Categories = void 0;
+const custom_errors_js_1 = require("../../utils/custom.errors.js");
+const category_js_1 = require("../../entity/category.js");
+const Get_Categories = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const allCategories = yield category_js_1.Category.find();
+        res.status(200).json({ status: 200, message: "All categories", data: allCategories });
     }
-    res.status(error.status).json({ status: error.status, name: error.name, message: error.message });
+    catch (error) {
+        next(new custom_errors_js_1.InternalServerError(500, error.message));
+    }
 });
-exports.handler = handler;
+exports.Get_Categories = Get_Categories;
