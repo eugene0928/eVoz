@@ -37,6 +37,14 @@ POST:
         output:
             1. podcast_id
 
+    
+    /change/passw/:admin_id:
+        input: 
+            1. new_passw
+            2. confirm_passw
+        output:
+            1. admin_id
+
 !NEXT REALEASE!
     /register/:admin_id:
         input:
