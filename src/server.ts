@@ -23,6 +23,7 @@ const PORT:number = 4000;
       app.use(Routers.UserRouter)
       app.use(Routers.CategoryRouter)
       app.use(Routers.PodcastRouter)
+      app.use(Routers.AdminRouter)
 
       //error handler
       app.use(handler)
