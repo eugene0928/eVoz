@@ -13,12 +13,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+require("./conf.js");
+require("./bot/bot.js");
 const data_source_js_1 = require("./utils/data-source.js");
 const podcast_js_1 = __importDefault(require("./data/podcast.js"));
 const index_js_1 = __importDefault(require("./modules/index.js"));
 const errorHandling_js_1 = require("./utils/errorHandling.js");
 const express_fileupload_1 = __importDefault(require("express-fileupload"));
-require("./conf.js");
+const path_1 = require("path");
 const app = (0, express_1.default)();
 const PORT = 4000;
 (function () {
@@ -27,6 +29,9 @@ const PORT = 4000;
             const db = yield data_source_js_1.AppDataSource.initialize();
             console.log("Db is initialized!");
             yield (0, podcast_js_1.default)(data_source_js_1.AppDataSource);
+            // static folders
+            app.use(express_1.default.static((0, path_1.join)(process.cwd(), "src", "images")));
+            app.use(express_1.default.static((0, path_1.join)(process.cwd(), "src", "podcasts")));
             // middlewares
             app.use(express_1.default.json());
             app.use((0, express_fileupload_1.default)());
