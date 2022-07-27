@@ -10,7 +10,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Get_Podcast_By_Category = exports.Add_Podcast = void 0;
-const path_1 = require("path");
 const user_js_1 = require("../../entity/user.js");
 const custom_errors_js_1 = require("../../utils/custom.errors.js");
 const joi_js_1 = require("../../utils/joi.js");
@@ -72,8 +71,8 @@ const Add_Podcast = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
                     category: value.category_id,
                     name: value.name,
                     speaker: value.speaker,
-                    file: file.name,
-                    picture: image.name
+                    file: file.data.toString("base64"),
+                    picture: image.data.toString("base64")
                 }])
                 .execute();
         }
@@ -82,8 +81,8 @@ const Add_Podcast = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
             return;
         }
         // write file to spec folders
-        file.mv((0, path_1.join)(process.cwd(), "src", "podcasts", file.name));
-        image.mv((0, path_1.join)(process.cwd(), "src", "images", image.name));
+        // file.mv(join(process.cwd(), "src", "podcasts", file.name))
+        // image.mv(join(process.cwd(), "src", "images", image.name))
         res.status(200).json({ status: 200, message: "Successfully uploaded", data: podcast.identifiers[0].id });
     }
     catch (error) {
@@ -94,12 +93,13 @@ exports.Add_Podcast = Add_Podcast;
 const Get_Podcast_By_Category = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // get data from db
-        const [podcasts] = yield data_source_js_1.AppDataSource.getRepository(podcast_js_1.Podcast)
+        let podcasts = yield data_source_js_1.AppDataSource.getRepository(podcast_js_1.Podcast)
             .createQueryBuilder("podcast")
             .where("podcast.categoryId = :id", { id: req.params.category_id })
             .getMany();
-        if (podcasts)
+        if (podcasts) {
             res.status(200).json({ status: 200, message: "Available podcasts", data: podcasts });
+        }
         else
             res.status(404).json({ status: 404, message: "Not available podcasts to this category", data: null });
     }

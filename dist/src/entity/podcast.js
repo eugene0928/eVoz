@@ -39,12 +39,12 @@ __decorate([
     __metadata("design:type", String)
 ], Podcast.prototype, "speaker", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
+    (0, typeorm_1.Column)({ type: "bytea" }),
+    __metadata("design:type", typeorm_1.Long)
 ], Podcast.prototype, "picture", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
+    (0, typeorm_1.Column)({ type: "bytea" }),
+    __metadata("design:type", typeorm_1.Long)
 ], Podcast.prototype, "file", void 0);
 __decorate([
     (0, typeorm_1.CreateDateColumn)(),
