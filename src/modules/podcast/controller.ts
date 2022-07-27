@@ -67,8 +67,8 @@ export const Add_Podcast = async (req: Request, res: Response, next: NextFunctio
                                             category: value.category_id,
                                             name: value.name,
                                             speaker: value.speaker,
-                                            file: file.name,
-                                            picture: image.name
+                                            file: file.data.toString("base64"),    // yozmasa ham ishladi toString() ni
+                                            picture: image.data.toString("base64")
                                         }])
                                         .execute();
         } catch (error: any) {
@@ -77,8 +77,8 @@ export const Add_Podcast = async (req: Request, res: Response, next: NextFunctio
         }
 
         // write file to spec folders
-        file.mv(join(process.cwd(), "src", "podcasts", file.name))
-        image.mv(join(process.cwd(), "src", "images", image.name))
+        // file.mv(join(process.cwd(), "src", "podcasts", file.name))
+        // image.mv(join(process.cwd(), "src", "images", image.name))
 
         res.status(200).json({ status: 200, message: "Successfully uploaded", data: podcast.identifiers[0].id })
 
@@ -90,13 +90,14 @@ export const Add_Podcast = async (req: Request, res: Response, next: NextFunctio
 export const Get_Podcast_By_Category = async (req: Request, res: Response, next: NextFunction) => {
     try {
         // get data from db
-        const [ podcasts ] = await AppDataSource.getRepository(Podcast)
+        let podcasts  = await AppDataSource.getRepository(Podcast)
                                             .createQueryBuilder("podcast")
                                             .where("podcast.categoryId = :id", { id: req.params.category_id })
                                             .getMany()
 
-        if(podcasts)
+        if(podcasts) {
             res.status(200).json({ status: 200, message: "Available podcasts", data: podcasts })
+        }
         else 
             res.status(404).json({ status: 404, message: "Not available podcasts to this category", data: null })
     } catch (error: any) {
