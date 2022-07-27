@@ -1,4 +1,4 @@
-import { BaseEntity, Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, DeleteDateColumn, UpdateDateColumn, ManyToOne  } from 'typeorm';
+import { BaseEntity, Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, DeleteDateColumn, UpdateDateColumn, ManyToOne, Long  } from 'typeorm';
 import { Length } from 'class-validator';
 import { Users } from './user.js'
 import { Category } from './category.js'
@@ -22,11 +22,11 @@ export class Podcast extends BaseEntity{
     @Length(2, 128)
     speaker!: string
 
-    @Column()
-    picture!: string
+    @Column({ type: "bytea" })
+    picture!: Long              // buffer qilganda ham ishladi 
 
-    @Column()
-    file!: string
+    @Column({ type: "bytea" })
+    file!: Long                 // buffer qilganda ham ishladi tekshirish kerak
     
     @CreateDateColumn()
     created_at!: Date
@@ -36,4 +36,4 @@ export class Podcast extends BaseEntity{
 
     @DeleteDateColumn()
     deleted_at!: Date
-} 
+}
